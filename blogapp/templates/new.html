@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block contents %}
+
+
+<main role="main" class="container">
+
+  <div class="row mb-2">
+    <div class="col-md-12 text-center">
+      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <strong class="d-inline-block mb-2 text-danger font-weight-bold">글쓰기</strong>
+          
+          <!--
+          <form method="POST">
+          {% csrf_token %}
+            <table>
+              {{form.as_table}}
+            </table>
+            <br>
+              <input type="submit" value="완료" class="btn btn-outline-danger font-weight-bold">
+              <input type="reset" value="취소" class="btn btn-outline-danger font-weight-bold">
+
+          </form>
+          -->
+
+          <form action="{% url 'create' %}">
+            <h5 class="mb-0">제목 <input type="text" name="title" autofocus></h5><br>
+            <h5 class="mb-0">내용
+            <textarea name="body" cols="23" rows="10"></textarea></h5><br>
+            <input type="submit" value="완료" class="btn btn-outline-danger font-weight-bold">
+            <input type="reset" value="취소" class="btn btn-outline-danger font-weight-bold">
+
+          </form>
+   
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+
+{% endblock %}
+  

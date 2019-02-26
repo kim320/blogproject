@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.5">
+    <title>BLOG PROJECT</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/blog/">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/blog/">
+    
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Bootstrap core CSS -->
+<link href="/docs/4.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="blog.css" rel="stylesheet">
+  </head>
+<body>
+  <div class="container">
+  <header class="blog-header py-3 border-bottom">
+    <div class="row flex-nowrap justify-content-between align-items-center">
+        <div class="col-4 pt-1">멋쟁이 사자처럼</div>
+      <div class="col-4 text-center">
+        <a class="blog-header-logo text-dark" href="{% url 'blog' %}"><h1>BLOG PROJECT</h1></a>
+      </div>
+      <div class="col-4 d-flex justify-content-end align-items-center">
+
+        {% if user.is_active %}
+            <h5 class="d-inline-block mb-2 text-danger font-weight-bold">{{user.username}}</h5>&nbsp;&nbsp;&nbsp;
+            <form id="logout" method="POST" action="{% url 'logout' %}"> {% csrf_token %} <input type="hidden" />
+              <button class="btn btn-sm btn-outline-danger font-weight-bold">로그아웃</button>  
+            </form>
+        {% else%}
+            <a class="btn btn-sm btn-outline-danger font-weight-bold" href="{% url 'login' %}">로그인</a>&nbsp;&nbsp;&nbsp;
+            <a class="btn btn-sm btn-outline-danger font-weight-bold" href="{% url 'signup' %}">회원가입</a>
+        {% endif %}
+
+      </div>
+    </div>
+  </header>
+
+  <div class="nav-scroller py-1 mb-2">
+    <nav class="nav d-flex justify-content-between">
+      <a class="p-2 text-danger font-weight-bold" href="{% url 'blog' %}">HOME</a>
+      <a class="p-2 text-danger font-weight-bold" href="{% url 'new' %}">글쓰기</a>
+      <a class="p-2 text-danger font-weight-bold" href="{% url 'portfolio' %}">Portfolio</a>
+    </nav>
+  </div>
+
+  <div class="jumbotron p-4 p-md-5 text-white rounded bg-dark">
+    <div class="col-md-6 px-0">
+      <h1 class="display-4 font-italic">LIKELION<br>Blog Project</h1>
+      <p class="lead my-3">4주 차 블로그 만들기<br><p>Blog template built for <a href="https://getbootstrap.com/">Bootstrap</a> by @mdo</p></p>
+      <p class="lead mb-0"><a href="https://class.likelion.org/accounts/login/?next=/board/notices/" class="text-white font-weight-bold">CLASS LION...</a></p>
+    </div>
+  </div>
+  </div>
+
+
+{% block contents %}
+
+{% endblock%}
+
+
+<footer class="blog-footer text-center">
+
+  <a href="#" class="btn btn-outline-danger"role="button">TOP</a>
+
+  <br>
+
+</footer>
+</body>
+</html>

@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block contents %}
+
+
+<main role="main" class="container">
+
+  <div class="row mb-2">
+    <div class="col-md-6">
+      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <strong class="d-inline-block mb-2 text-primary">World</strong>
+          <h3 class="mb-0">Featured post</h3>
+          <div class="mb-1 text-muted">Nov 12</div>
+          <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
+          <a href="#" class="stretched-link">Continue reading</a>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+          <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <strong class="d-inline-block mb-2 text-success">Design</strong>
+          <h3 class="mb-0">Post title</h3>
+          <div class="mb-1 text-muted">Nov 11</div>
+          <p class="mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
+          <a href="#" class="stretched-link">Continue reading</a>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+          <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-12 blog-main">
+      <h3 class="pb-4 mb-4 text-danger border-bottom font-weight-bold">전체글 ({{blogs.count}})</h3>
+
+      {% for blog in posts %}
+      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <strong class="d-inline-block mb-2 text-danger">No.</strong>
+
+          <div class="blog-post">
+            <h2 class="blog-post-title">{{blog.title}}</h2>
+            <p class="blog-post-meta">{{blog.pub_date}}</p>
+            <p>{{blog.summary}} ...<a href="{%url 'detail' blog.id%}">더보기</a></p>
+          </div><!-- /.blog-post -->
+          
+        </div>
+      </div>
+
+      {% endfor %}
+    
+      <ul class="pagination justify-content-center">
+        <li {% if not posts.has_previous %} class="disabled btn btn-outline-danger"{% endif %}>
+            <a {% if posts.has_previous %}href="?page={{ posts.previous_page_number }}" class="btn btn-outline-danger" aria-label="Previous" {% endif %}><span aria-hidden="true">«</span></a>
+          </li>
+          <li><a href="?page=1" class="btn btn-outline-danger text-danger">First</a></li>
+        {% for linkpage in page_range %}
+            {% ifequal linkpage posts.number %}
+                <li class="active ">
+                  <a href="#" class="btn btn-outline-danger text-danger">{{ posts.number }}<span class="sr-only btn btn-outline-danger text-danger">(current)</span></a>
+                </li>
+            {% else %}
+                <li><a href="?page={{ linkpage }}" class="btn btn-outline-danger text-danger">{{ linkpage }}</a></li>
+            {% endifequal %}
+        {% endfor %}
+        <li><a href="?page={{ posts.paginator.num_pages }}" class="btn btn-outline-danger text-danger">Last</a></li>
+        <li {% if not posts.has_next %} class="disabled btn btn-outline-danger"{% endif %}>
+            <a {% if posts.has_next %}href="?page={{ posts.next_page_number }}" class="btn btn-outline-danger text-danger" aria-label="Next" {% endif %}><span aria-hidden="true">»</span></a>
+          </li>
+      </ul>
+
+
+
+
+
+
+    </div><!-- /.blog-main -->
+
+  </div><!-- /.row -->
+
+</main><!-- /.container -->
+
+
+{% endblock %}

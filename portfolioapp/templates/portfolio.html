@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% load staticfiles%}
+
+{% block contents %}
+
+<main role="main" class="container">
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img src="{% static 'yunakim.jpg' %}" alt="김연아" class="bd-placeholder-img card-img-top" width="100%" height="300" >
+            <div class="card-body">
+              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                </div>
+                <small class="text-muted">9 mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {% for portfolio in portfolios.all %}
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img src="{{portfolio.image.url}}" alt="김연아" class="bd-placeholder-img card-img-top" width="100%" height="300" >
+            <div class="card-body">
+              <p class="card-text">{{portfolio.description}}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                </div>
+                <small class="text-muted">9 mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+
+      </div>
+    </div>
+  </div>
+  <br>
+  <ul class="pagination justify-content-center">
+    <li {% if not posts.has_previous %} class="disabled btn btn-outline-danger"{% endif %}>
+        <a {% if posts.has_previous %}href="?page={{ posts.previous_page_number }}" class="btn btn-outline-danger" aria-label="Previous" {% endif %}><span aria-hidden="true">«</span></a>
+      </li>
+      <li><a href="?page=1" class="btn btn-outline-danger text-danger">First</a></li>
+    {% for linkpage in page_range %}
+        {% ifequal linkpage posts.number %}
+            <li class="active ">
+              <a href="#" class="btn btn-outline-danger text-danger">{{ posts.number }}<span class="sr-only btn btn-outline-danger text-danger">(current)</span></a>
+            </li>
+        {% else %}
+            <li><a href="?page={{ linkpage }}" class="btn btn-outline-danger text-danger">{{ linkpage }}</a></li>
+        {% endifequal %}
+    {% endfor %}
+    <li><a href="?page={{ posts.paginator.num_pages }}" class="btn btn-outline-danger text-danger">Last</a></li>
+    <li {% if not posts.has_next %} class="disabled btn btn-outline-danger"{% endif %}>
+        <a {% if posts.has_next %}href="?page={{ posts.next_page_number }}" class="btn btn-outline-danger text-danger" aria-label="Next" {% endif %}><span aria-hidden="true">»</span></a>
+      </li>
+  </ul>
+</main>
+
+{% endblock %}

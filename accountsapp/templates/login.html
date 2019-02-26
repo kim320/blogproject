@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% load socialaccount %}
+{% providers_media_js %}
+
+
+
+{% block contents %}
+
+<main role="main" class="container">
+
+  <div class="row mb-2">
+    <div class="col-md-12 text-center">
+      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <strong class="d-inline-block mb-2 text-danger font-weight-bold">상세글</strong>
+          
+          <form method= "POST" action="{% url 'login' %}">
+          {% csrf_token %}
+
+            <h5 class="mb-0">이름(ID) <input name="username"  type="text" placeholder="이름(ID)를 입력하세요."> </h5><br>
+            <h5 class="mb-0">비밀번호 <input name="pwd"  type="password" placeholder="비밀번호를 입력하세요."> </h5><br>
+            
+            <input type="submit" value="완료" class="btn btn-outline-danger font-weight-bold">
+            
+          </form>
+          <br>
+          
+          <h3><a href="{% provider_login_url 'google' %}"><i class="fa fa-google-plus" style="color:crimson"></i></a></h3>
+    
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+  
+{% endblock %}
